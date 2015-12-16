@@ -22,7 +22,7 @@ var QueryBox = React.createClass({
   render: function() {
     return (
       <div className="QueryBox">
-        <h1>Enter Query</h1>
+        <h1>Query</h1>
         <CommentList data={this.state.data} />
         <CommentForm />
       </div>
@@ -79,9 +79,11 @@ var CommentForm = React.createClass({
   render: function() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
-        <input type="result" placeholder="DB query" ref="document" />
-        <input type="result" placeholder="Result" ref="result" />
-        <input type="submit" value="Post" />
+        <textarea type="result" placeholder="DB query" ref="document" rows="25" cols="50"/>
+        <br/>
+        <input type="submit" value="Query" />
+        <br/>
+        <input type="result" placeholder="Query Result" ref="result" />
       </form>
     );
   }
