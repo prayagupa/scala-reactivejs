@@ -31,7 +31,8 @@ var QueryBox = React.createClass({
 });
 
 var CommentList = React.createClass({
-  render: function() {
+  render:
+  function() {
     var commentNodes = this.props.data.map(function (comment) {
       return (
         <Comment key={comment.docId} document={comment.document}>
@@ -49,6 +50,7 @@ var CommentList = React.createClass({
 });
 
 var QueryForm = React.createClass({
+
   handleSubmit: function(e) {
     e.preventDefault();
     var document = React.findDOMNode(this.refs.document).value.trim();
@@ -57,9 +59,9 @@ var QueryForm = React.createClass({
       return;
     }
 
-    var commentUrl = "http://localhost:9000/query?document=" + document;
+    var queryUrl = "http://localhost:9000/query?document=" + document;
     $.ajax({
-          url: commentUrl,
+          url: queryUrl,
           method: 'POST',
           dataType: 'json',
           cache: false,
@@ -67,15 +69,15 @@ var QueryForm = React.createClass({
             console.log(data)
           }.bind(this),
           error: function(xhr, status, err) {
-            console.error(commentUrl, status, err.toString());
+            console.error(queryUrl, status, err.toString());
           }.bind(this)
         });
 
     // clears the form fields
-    // React.findDOMNode(this.refs.document).value = '';
     React.findDOMNode(this.refs.result).value = '';
     return;
   },
+
   render: function() {
     return (
       <form className="queryForm" onSubmit={this.handleSubmit}>
