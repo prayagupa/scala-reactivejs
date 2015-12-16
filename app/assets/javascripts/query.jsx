@@ -24,7 +24,7 @@ var QueryBox = React.createClass({
       <div className="QueryBox">
         <h1>Query</h1>
         <CommentList data={this.state.data} />
-        <CommentForm />
+        <QueryForm />
       </div>
     );
   }
@@ -48,16 +48,16 @@ var CommentList = React.createClass({
   }
 });
 
-var CommentForm = React.createClass({
+var QueryForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     var document = React.findDOMNode(this.refs.document).value.trim();
     var result = React.findDOMNode(this.refs.result).value.trim();
-    if (!result || !document) {
+    if (!document) {
       return;
     }
 
-    var commentUrl = "http://localhost:9000/query?document=" + document + "&result=" + result;
+    var commentUrl = "http://localhost:9000/query?document=" + document;
     $.ajax({
           url: commentUrl,
           method: 'POST',
@@ -72,18 +72,18 @@ var CommentForm = React.createClass({
         });
 
     // clears the form fields
-    React.findDOMNode(this.refs.document).value = '';
+    // React.findDOMNode(this.refs.document).value = '';
     React.findDOMNode(this.refs.result).value = '';
     return;
   },
   render: function() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
+      <form className="queryForm" onSubmit={this.handleSubmit}>
         <textarea type="result" placeholder="DB query" ref="document" rows="25" cols="50"/>
         <br/>
         <input type="submit" value="Query" />
         <br/>
-        <input type="result" placeholder="Query Result" ref="result" />
+        <textarea type="result" placeholder="Query Result" ref="result" rows="25" cols="50"/>
       </form>
     );
   }

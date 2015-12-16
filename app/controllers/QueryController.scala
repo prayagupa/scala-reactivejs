@@ -30,12 +30,11 @@ class QueryController extends Controller {
   }
 
 
-  def query(document: String, text: String) = Action {
+  def query(document: String) = Action {
 
     val newResult = Json.obj(
       docIdKey -> UUID.randomUUID().toString,
-      queryKey -> document,
-      resultKey -> text)
+      resultKey -> document)
 
     resultsJson = resultsJson :+ newResult
     Ok(newResult)
